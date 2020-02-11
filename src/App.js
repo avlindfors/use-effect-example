@@ -1,26 +1,42 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useEffect } from "react";
 
 function App() {
+  const [isOneOfTwo, setIsOneOfTwo] = useState(true);
+
+  const toggleComponent = () => {
+    setIsOneOfTwo(!isOneOfTwo);
+  };
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <button onClick={toggleComponent}>Toggle</button>
+      {isOneOfTwo ? <One /> : <Two />}
     </div>
   );
+}
+
+function One() {
+
+  useEffect(() => {
+    console.log("One is up");
+    return () => {
+      console.log("One is down");
+    };
+  }, []);
+
+  return <p>I'm one</p>;
+}
+
+function Two() {
+  
+  useEffect(() => {
+    console.log("Two is up");
+    return () => {
+      console.log("Two is down");
+    };
+  }, []);
+
+  return <p>I'm two</p>;
 }
 
 export default App;
